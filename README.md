@@ -19,4 +19,14 @@ document.body.appendChild(player.DOMElement());
 </script>
 ```
 
+Support
+-------
+
+<audio> is used to play AAC files gathered from the iTunes API.
+
+A Flash audio player should be used for browsers not supporting AAC files.
+
+More
+----
+
 Please read iTunes Song Previews guidelines : http://www.apple.com/itunes/affiliates/resources/blog/song-previews.html
