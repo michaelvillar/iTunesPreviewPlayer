@@ -1,4 +1,5 @@
-iTunesPreviewPlayer = function() {
+"use strict"
+var iTunesPreviewPlayer = function() {
   // helpers
   var callbackCount = 0;
   var apiCall = function(args, callback) {
@@ -12,7 +13,7 @@ iTunesPreviewPlayer = function() {
     args.callback = callbackName;
 
     var url = '';
-    for(arg in args) {
+    for(var arg in args) {
       url += (url == '') ? '?' : '&';
       url += encodeURIComponent(arg) + '=' + encodeURIComponent(args[arg]);
     }
