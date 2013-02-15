@@ -2,7 +2,6 @@ iTunesPreviewPlayer
 ===================
 
 iTunesPreviewPlayer makes it easy to embed an iTunes Preview player of any iTunes Store track.
-Read guidelines of iTunes Song Previews : http://www.apple.com/itunes/affiliates/resources/blog/song-previews.html
 
 Demo : http://michaelvillar.s3.amazonaws.com/iTunesPreviewPlayer/example.html
 
@@ -19,3 +18,5 @@ var player = new iTunesPreviewPlayer("coldplay viva la vida");
 document.body.appendChild(player.DOMElement());
 </script>
 ```
+
+Please read iTunes Song Previews guidelines : http://www.apple.com/itunes/affiliates/resources/blog/song-previews.html
