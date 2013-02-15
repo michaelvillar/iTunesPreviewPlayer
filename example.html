@@ -95,8 +95,8 @@ var StyledPlayer = function(term) {
 }
 
 var firstPlayer = null;
-var section = document.body.querySelector('section');
-
+var section = document.querySelector('section');
+var fragment = document.createDocumentFragment();
 // A few songs for demo purpose
 [ 'latch sam smith disclosure', 
   'michael jackson billie jean', 
@@ -106,11 +106,12 @@ var section = document.body.querySelector('section');
   var player = new StyledPlayer(term);
   if(!firstPlayer)
     firstPlayer = player;
-  section.appendChild(player.DOMElement());
+  fragment.appendChild(player.DOMElement());
 });
+section.appendChild(fragment);
 
 // Handling the search input
-var searchInput = document.body.querySelector('input');
+var searchInput = document.querySelector('input');
 searchInput.addEventListener('keypress', function(e) {
   // User pressed enter
   if(e.charCode == 13) {
