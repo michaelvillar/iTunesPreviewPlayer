@@ -22,7 +22,7 @@ document.body.appendChild(player.DOMElement());
 Support
 -------
 
-<audio> is used to play AAC files gathered from the iTunes API.
+&lt;audio&gt; is used to play AAC files gathered from the iTunes API.
 
 A Flash audio player should be used for browsers not supporting AAC files.
 
