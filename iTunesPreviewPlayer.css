@@ -1,0 +1,48 @@
+.iTunesPreviewPlayer {
+  position: relative;
+  display: block;
+  background: rgb(204, 204, 204);
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+}
+.iTunesPreviewPlayer.error,
+.iTunesPreviewPlayer:not(.loaded) {
+  opacity: 0.5;
+}
+.iTunesPreviewPlayer:not(.error).loaded:active {
+  background: #000;
+}
+.iTunesPreviewPlayer::before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 7px;
+  left: 9px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #000;
+}
+.iTunesPreviewPlayer:not(.error).loaded:active::before {
+  border-left-color: #FFF;
+}
+.iTunesPreviewPlayer.playing::before {
+  top: 7px;
+  left: 8px;
+  width: 2px;
+  height: 9px;
+  border:10px solid #000;
+  border-width:0 3px;
+}
+.iTunesPreviewPlayer.playing:not(.error).loaded:active::before {
+  border-color: #FFF;
+}
+
+.iTunesPreviewPlayer canvas {
+  position: absolute;
+  top: 0; 
+  width: 100%;
+  height: 100%;
+}

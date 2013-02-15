@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<!-- Load the .css & .js in your webpage -->
+<link href="iTunesPreviewPlayer.css" rel="stylesheet" type="text/css" />
+<script src="iTunesPreviewPlayer.js" type="text/javascript"></script>
+<style>
+* {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 10px;
+}
+section {
+  position: relative;
+  width: 300px;
+  left: 50%;
+  margin-left: -150px;
+}
+input {
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.styledPlayer {
+  position: relative;
+  background: rgb(235, 235, 235);
+  padding: 6px;
+  border-radius: 15px;
+  margin-bottom: 4px;
+}
+.styledPlayer .artist,
+.styledPlayer .track {
+  position: absolute;
+  top: 5px;
+  left: 36px;
+  right: 10px;
+  height: 16px;
+  font: 12px 'Lucida Grande', Helvetica;
+  overflow: hidden;
+  text-shadow: rgba(255, 255, 255, 0.5) 0 1px;
+}
+.styledPlayer .artist {
+  top: 19px;
+  font-size: 10px;
+  color: rgb(100, 100, 100);
+}
+.styledPlayer .iTunesPreviewPlayer {
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px;
+}
+</style>
+<body>
+  <section>
+    <input type="search" placeholder="Search a song" />
+  </section>
+</body>
+<script>
+// A player using the iTunesPreviewPlayer but adding track and artist name
+var StyledPlayer = function(term) {
+  // Create an iTunesPreviewPlayer
+  this._player = new iTunesPreviewPlayer(term);
+  // Delegate called when the player is loaded
+  // Use this to get access to artist and track name
+  this._player.onLoaded = function() {
+    if(!this._player.isError()) {
+      this._artistNameElement.innerHTML = this._player.artistName();
+      this._trackNameElement.innerHTML = this._player.trackName();
+    }
+    else {
+      this._artistNameElement.innerHTML = 'Sorry!';
+      this._trackNameElement.innerHTML = 'Track not found';
+    }
+  }.bind(this);
+
+  // Create UI
+  this._DOMElement = document.createElement('div');
+  this._DOMElement.classList.add('styledPlayer');
+  this._DOMElement.appendChild(this._player.DOMElement());
+
+  this._artistNameElement = document.createElement('div');
+  this._artistNameElement.classList.add('artist');
+  this._artistNameElement.innerHTML = 'Please wait';
+  this._DOMElement.appendChild(this._artistNameElement);
+
+  this._trackNameElement = document.createElement('div');
+  this._trackNameElement.classList.add('track');
+  this._trackNameElement.innerHTML = 'Loading…';
+  this._DOMElement.appendChild(this._trackNameElement);
+
+  this.DOMElement = function() {
+    return this._DOMElement;
+  }
+}
+
+var firstPlayer = null;
+var section = document.body.querySelector('section');
+
+// A few songs for demo purpose
+[ 'latch sam smith disclosure', 
+  'michael jackson billie jean', 
+  'daft punk the game has changed',
+  'angus stone it was blue',
+  'coldplay charlie brown' ].forEach(function(term) {
+  var player = new StyledPlayer(term);
+  if(!firstPlayer)
+    firstPlayer = player;
+  section.appendChild(player.DOMElement());
+});
+
+// Handling the search input
+var searchInput = document.body.querySelector('input');
+searchInput.addEventListener('keypress', function(e) {
+  // User pressed enter
+  if(e.charCode == 13) {
+    var term = searchInput.value;
+    searchInput.value = '';
+
+    var player = new StyledPlayer(term);
+    section.insertBefore(player.DOMElement(), firstPlayer.DOMElement());
+    firstPlayer = player;
+  }
+});
+</script>
+</html>
